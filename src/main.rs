@@ -1,10 +1,14 @@
-pub mod day1;
+mod day1;
+mod day2;
+mod read_lines;
 
 fn main() {
     let filepath = get_input::get_input("Please enter file path");
     if validate_file_path::validate(&filepath) {
-        day1::expense_calc(&filepath);
-        day1::expense_three_calc(&filepath)
+        // day1 execution
+        // day1::expense_calc(&filepath);
+        // day1::expense_three_calc(&filepath)
+        println!("{}",day2::get_num_correct_password_toboggan(&filepath));
     } else { println!("File doesn't exist") }
 
 }

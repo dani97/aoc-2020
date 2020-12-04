@@ -1,7 +1,5 @@
-use std::fs::File;
-use std::io::{self, BufRead};
-use std::path::Path;
 use std::collections::HashMap;
+use super::read_lines;
 
 pub fn expense_calc(filepath: &str) {
     let expenses = create_hash_map(filepath);
@@ -34,7 +32,7 @@ pub fn expense_three_calc(filepath: &str) {
 
 fn create_hash_map(filepath: &str) -> HashMap<i32, bool> {
     let mut expenses = HashMap::new();
-    if let Ok(lines) = read_lines(filepath) {
+    if let Ok(lines) = read_lines::read_lines(filepath) {
         // Consumes the iterator, returns an (Optional) String
         for line in lines {
             if let Ok(ip) = line {
@@ -47,7 +45,7 @@ fn create_hash_map(filepath: &str) -> HashMap<i32, bool> {
 
 fn create_vec(filepath: &str) -> Vec<i32> {
     let mut expenses = Vec::new();
-    if let Ok(lines) = read_lines(filepath) {
+    if let Ok(lines) = read_lines::read_lines(filepath) {
         // Consumes the iterator, returns an (Optional) String
         for line in lines {
             if let Ok(ip) = line {
@@ -57,10 +55,4 @@ fn create_vec(filepath: &str) -> Vec<i32> {
     }
     expenses.sort();
     expenses
-}
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-    where P: AsRef<Path>, {
-    let file = File::open(filename)?;
-    Ok(io::BufReader::new(file).lines())
 }
